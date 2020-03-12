@@ -7,6 +7,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(join(__dirname, 'public')))
 
+//bring in routes
+app.use(require('./routes'))
 //html routes
 //homepage, rendering index.html
 app.get('/', (request, response) => {
@@ -23,7 +25,7 @@ app.get('/stats', (request, response) => {
   response.sendFile(join(__dirname, 'public', 'stats.html'))
 })
 
-mongoose.connect('mongodb://localhost/workoutdb', {
+mongoose.connect('mongodb://localhost/workout', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
