@@ -16,19 +16,17 @@ router.post('/workouts', (request, response) => {
 })
 
 //update a workout
-router.put('/workouts/:id', (request, repsonse) => {
-  Workout.update({id: request.params.id}, {$set: request.body}, (error, docs) =>{
-    if(error) throw error
-    response.sendStatus(200)
-  })
+router.put('/workouts/:id', (request, response) => {
+  Workout.findOneAndUpdate({_id: request.params.id}, request.body)
+  .then( () => response.sendStatus(200))
+  .catch(error => response.sendStatus(400))
 })
 
 //delete a workout
 router.delete('/workouts/:id', (request, response) => {
-  Workout.deleteOne({id: request.params.id}, (error, docs) => {
-    if(error) throw error
-    response.sendStatus(200)
-  })
+  Workout.deleteOne({_id: request.params.id})
+  .then( () => response.sendStatus(200))
+  .catch(error => response.sendStatus(400))
 })
 
 module.exports = router

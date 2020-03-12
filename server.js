@@ -27,7 +27,8 @@ app.get('/stats', (request, response) => {
 
 mongoose.connect('mongodb://localhost/workout', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
 .then( () => app.listen(process.env.PORT || 3000))
 .catch( error => console.error(error))
