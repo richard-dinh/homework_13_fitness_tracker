@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const {join} = require('path')
+const morgan = require('morgan')
 const app = express()
 
+app.use(morgan('tiny'))
+app.use(express.static(join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static(join(__dirname, 'public')))
 
 //bring in routes
 app.use(require('./routes'))
