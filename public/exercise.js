@@ -20,11 +20,12 @@ let shouldNavigateAway = false;
 async function initExercise() {
   let workout;
 
-  if (location.search.split("=")[1] === undefined) {
-    workout = await API.createWorkout()
-    console.log(workout)
-  }
+  // if (location.search.split("=")[1] === undefined) {
+  //   workout = await API.createWorkout()
+  //   console.log(workout)
+  // }
   if (workout) {
+    console.log(workout)
     location.search = "?id=" + workout._id;
   }
 
@@ -113,8 +114,12 @@ async function handleFormSubmit(event) {
     workoutData.reps = Number(repsInput.value.trim());
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
-
-  await API.addExercise(workoutData);
+  if(location.search){
+    await API.addExercise(workoutData);
+  }
+  else{
+    await API.createWorkout(workoutData)
+  }
   clearInputs();
   toast.classList.add("success");
 }

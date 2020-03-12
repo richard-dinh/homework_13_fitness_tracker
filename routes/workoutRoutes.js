@@ -10,7 +10,10 @@ router.get('/workouts', (request, response) => {
 
 //create a workout
 router.post('/workouts', (request, response) => {
-  Workout.create(request.body)
+  console.log(request.body)
+  Workout.create({
+    exercises: [request.body]
+  })
   .then( () => response.sendStatus(200))
   .catch( error => console.error(error))
 })
