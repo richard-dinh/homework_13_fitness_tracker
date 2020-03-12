@@ -17,14 +17,15 @@ router.post('/workouts', (request, response) => {
 
 //update a workout
 router.put('/workouts/:id', (request, response) => {
-  Workout.findOneAndUpdate({_id: request.params.id}, request.body)
+  //pushes the exercise into the specifeid id
+  Workout.update({_id: request.params.id}, {$push: {exercises: request.body}})
   .then( () => response.sendStatus(200))
-  .catch(error => response.sendStatus(400))
+  .catch( error => console.error(error) )
 })
 
 //delete a workout
 router.delete('/workouts/:id', (request, response) => {
-  Workout.deleteOne({_id: request.params.id})
+  Workout.findByIdAndDelete(request.params.id)
   .then( () => response.sendStatus(200))
   .catch(error => response.sendStatus(400))
 })

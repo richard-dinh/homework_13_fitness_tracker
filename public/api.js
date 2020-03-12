@@ -19,7 +19,7 @@ const API = {
       body: JSON.stringify(data)
     });
 
-    const json = await res.json();
+    const json = res;
 
     return json;
   },
@@ -36,7 +36,7 @@ const API = {
   },
 
   async getWorkoutsInRange() {
-    const res = await fetch(`/api/workouts/range`);
+    const res = await fetch(`/api/workouts`);
     const json = await res.json();
 
     return json;
