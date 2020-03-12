@@ -12,7 +12,7 @@ router.get('/workouts', (request, response) => {
 router.post('/workouts', (request, response) => {
   Workout.create(request.body)
   .then( () => response.sendStatus(200))
-  .catch( error => response.sendStatus(400))
+  .catch( error => console.error(error))
 })
 
 //update a workout
